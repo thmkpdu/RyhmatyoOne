@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="entry">
-		<form>
+		<form action="save_entry.php" method="post">
 			<label for="name">Nimesi: </label>
 			<input id="name" type=text required></input>
 			<label for="email">Sähköposti: </label>
