@@ -9,6 +9,7 @@
 <body>
 	<div class="entry">
 		<form action="save_entry.php" method="post">
+			<input type=text name="datetime" hidden>
 			<label for="name">Nimesi: </label>
 			<input id="name" name="name" type=text required>
 			<label for="email">Sähköposti: </label>
