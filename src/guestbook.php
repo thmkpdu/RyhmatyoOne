@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 $conn->set_charset('utf8mb4');
 
 // Construct SQL query to create a table if it does not exist
-$sql = "CREATE TABLE IF NOT EXISTS guestbook.entries ";
+$sql = "CREATE TABLE IF NOT EXISTS entries ";
 $sql .= "(dt CHAR(29) NOT NULL, "; // Javascript UTC datetime takes up to 29 chars
 $sql .= "name CHAR(255) NOT NULL, ";
 $sql .= "email CHAR(254), "; // Combined all limitations results to 254 chars
@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Load previous guestbook entries to a variable or exit on failure
-$sql = "SELECT * FROM guestbook.entries";
+$sql = "SELECT * FROM entries";
 $data_set = $conn->query($sql);
 if($data_set === false) {
 	die("Something went wrong: " . $conn->error);
