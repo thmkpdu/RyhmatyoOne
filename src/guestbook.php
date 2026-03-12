@@ -40,6 +40,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if( ! $entry_cmd->execute() ) {
 		die("Saving guestbook entry failed: " . $conn->error);
 	}
+
+	// Redirect to self to prevent secondary submits on reload
+	header("Location: " . $_SERVER['PHP_SELF']);
+
+	// No need to process rest of file after redirection to self
+	exit();
 }
 
 // Load previous guestbook entries to a variable or exit on failure
