@@ -71,7 +71,7 @@ if($data_set === false) {
 	<div class="entry">
 		<form method="post">
 			<!-- Javascript stores user's datetime from browser to a hidden input -->
-			<input id="time" type=text name="datetime" hidden>
+			<input id="time" type="hidden" name="datetime">
 			<label for="name">Name: </label>
 			<input id="name" name="name" type=text required>
 			<label for="email">Email: </label>
