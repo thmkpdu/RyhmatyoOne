@@ -1,20 +1,12 @@
 body {
 	font-family: Helvetica, sans-serif;
 	font-size: 16px;
-	background-color: lightcyan;
+	background-color: whitesmoke;
+	border-color: #50585F;
 }
 
 h1 {
-	color: #04465E;
 	margin-bottom: 12px;
-}
-
-h4 {
-	color: #04465E;
-}
-
-label {
-	color: #04465E;
 }
 
 .container {
@@ -29,9 +21,8 @@ label {
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	background-color: lightblue;
+	background-color: lightgray;
 	border: 2px solid;
-	border-color: #045C7C;
 	margin-bottom: 24px;
 }
 
@@ -52,8 +43,6 @@ input {
 }
 
 button {
-	color: #04465E;
-	border-color: #045C7C;
 	margin-top: 16px;
 	margin-bottom: 16px;
 }
@@ -68,27 +57,24 @@ table, th, td {
 	text-align: left;
 	vertical-align: top;
 	font-size: 12px;
-	background-color: lightblue;
+	background-color: whitesmoke;
 }
 
 table {
 	min-width: 500px;
 	border: 2px solid;
-	border-color: #045C7C;
 	width: 100%;
 }
 
 caption {
 	border: 2px solid;
 	border-bottom: unset;
-	border-color: #045C7C;
 	font-size: 18px;
-	background-color: #0780AC;
+	background-color: slategray;
 }
 
 th, td {
 	border-bottom: 1px solid;
-	border-color: #045C7C;
 	padding-left: 5px;
 	padding-right: 5px;
 	white-space: nowrap;
@@ -98,7 +84,7 @@ th, td {
 }
 
 th {
-	background-color: #78D5F6;
+	background-color: lightgray;
 }
 
 #name {
