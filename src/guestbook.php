@@ -30,7 +30,7 @@ try {
 	// Create table or exit if creation fails
 	$result = $conn->query($sql);
 
-} catch (mysql_sql_exection $e) {
+} catch (mysqli_sql_exception $e) {
 	echo $ERROR_HTML;
 	return;
 }
