@@ -24,7 +24,7 @@ $sql .= "message VARCHAR(1024))";
 // Create table or exit if creation fails
 $result = $conn->query($sql);
 if($result === false) {
-	die("Something went wrong: " .  $conn->error);
+	die("Table creation failed: " .  $conn->error);
 }
 
 // Catch if user is submitting a new guestbook entry
@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$entry_cmd = $conn->prepare("INSERT INTO entries (dt, name, email, message) VALUES(?, ?, ?, ?)");
 	$entry_cmd->bind_param("ssss", $dt, $name, $email, $message);
 	if( ! $entry_cmd->execute() ) {
-		die("Saving guestbook entry failed: " . $conn->error);
+		die("Inserting guestbook entry failed: " . $conn->error);
 	}
 
 	// Redirect to self to prevent secondary submits on reload
@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 $sql = "SELECT * FROM entries ORDER BY dt DESC";
 $data_set = $conn->query($sql);
 if($data_set === false) {
-	die("Something went wrong: " . $conn->error);
+	die("Loading guetbook entries failed: " . $conn->error);
 }
 ?>
 
