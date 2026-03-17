@@ -110,6 +110,7 @@ try {
 				<th>Message</th>
 			</tr>
 			<?php // Guestbook entries dynamically from database
+				if($data_set === false) return;
 				while($row = $data_set->fetch_assoc()) {
 					echo "<tr>";
 					echo "<td>" . htmlspecialchars($row['dt']) . "</td>";
