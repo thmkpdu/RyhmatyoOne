@@ -1,3 +1,6 @@
 # Ignore temporary files ending with ~
 *~
 
+# Ignore Visual code settings
+.vscode/
+
