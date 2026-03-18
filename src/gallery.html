@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Fitness Plus - Kuvagalleria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gallery</h1>
+
+    <div class="gallery">
+        <img src="./images/AdobeStock_316560535.jpeg"                                                                    alt="Asiakas treenaamassa" loading="lazy">
+        <img src="./images/AdobeStock_427998706.jpeg"                                                                    alt="Sali kuva" loading="lazy">
+        <img src="./images/AdobeStock_297603559.jpeg"                                                                    alt="Joogaharjoitus" loading="lazy">
+        <img src="./images/AdobeStock_471204347.jpeg"                                                                    alt="Ryhmätunti" loading="lazy">
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close" id="close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        const gallery = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('close');
+
+        let currentIndex = 0;
+
+        gallery.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentIndex = index;
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                lightbox.style.display = 'none';
+            } else if (e.key === 'ArrowRight') {
+                currentIndex = (currentIndex + 1) % gallery.length;
+                lightboxImg.src = gallery[currentIndex].src;
+                lightboxImg.alt = gallery[currentIndex].alt;
+            } else if (e.key === 'ArrowLeft') {
+                currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+                lightboxImg.src = gallery[currentIndex].src;
+                lightboxImg.alt = gallery[currentIndex].alt;
+            }
+        });
+    </script>
+
+</body>
+</html>

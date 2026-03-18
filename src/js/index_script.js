@@ -25,10 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
         //window.location.href = "guestbook.php";
     });
 
-    //gallery - to be added
+    //gallery 
     document.getElementById("btnGallery").addEventListener("click", () => {
-        //code for going completely to the wanted page instead of opening under index navigation
-        //window.location.href = "gallery.html";
+         
+        document.getElementById("pageContent").setAttribute("src", "gallery.html");
+
+
     });
 
 
