@@ -76,7 +76,7 @@ try {
 	<div class="container">
 		<img src="siteimages/silhouette-small.png">
 		<div class="entry">
-			<h4>Add entry to guestbook and leave a message</h4>
+			<h4>Leave a message to our guestbook</h4>
 			<form method="post">
 				<!-- Javascript stores user's datetime from browser to a hidden input -->
 				<input id="time" type="hidden" name="datetime">
