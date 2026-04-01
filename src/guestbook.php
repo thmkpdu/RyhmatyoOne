@@ -45,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	try {
 		$entry_cmd = $conn->prepare("INSERT INTO entries (dt, name, email, message) VALUES(?, ?, ?, ?)");
 		$entry_cmd->bind_param("ssss", $dt, $name, $email, $message);
-		$entry_cmd->execute()
+		$entry_cmd->execute();
 	} catch(Throwable) {
 		// Yes, empty. No ideas how to react.
 	} finally {
