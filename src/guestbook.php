@@ -51,27 +51,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$ip = $_SERVER['REMOTE_ADDR'];
 	$file = sys_get_temp_dir() . "/gb_" . md5($ip);
 
-	if(file_exists($file) && time() - filemtime($file) < 30) {
-		// Rate limit kicks in, redirect to self
-		error_log("Rate limit kicked in", 0);
-		header("Location: " . $_SERVER['PHP_SELF']);
-		return;
-	}
-	touch($file);
+	try {
+		if(file_exists($file) && time() - filemtime($file) < 30) {
+			// Rate limit kicks in
+			error_log("Rate limit kicked in", 0);
+			throw new Exception("Guestbook is rate limited");
+			touch($file);
+		}
+		touch($file);
 
-	// Honeypot
-	if(!empty($_POST['firstname'])) {
-		// Bot detection kicks in, redirect to self
-		error_log("Bot detection kicked in", 0);
-		header("Location: " . $_SERVER['PHP_SELF']);
-		return;
-	}
+		if(!empty($_POST['firstname'])) {
+			// Bot detection kicks in
+			error_log("Bot detection kicked in", 0);
+			throw new Exception("Suspected bot action");
+		}
 
-	// Time check
-	if(time() - $_POST['form_time'] < 3) {
-		// Suspiciously fast, redirect to self
-		error_log("Faster than 3 seconds", 0);
-		header("Location: " . $_SERVER['PHP_SELF']);
+		if(time() - $_POST['form_time'] < 3) {
+			// Suspiciously fast
+			error_log("Time check kicked in", 0);
+			throw new Exception("Suspected bot action");
+		}
+
+	} catch(Exception $e) {
+		$ERROR_HTML = '<!DOCTYPE html><html lang="en"><head>';
+		$ERROR_HTML .= '<meta http-equiv="refresh" content="3"url=' . $_SERVER['PHP_SELF'] . '">';
+		$ERROR_HTML .= '</head><body>';
+		$ERROR_HTML .= '<h1 style="text-align:center">' . $e->getMessage() . '</h1>';
+		$ERROR_HTML .= '</body>';
+		$ERROR_HTML .= '</html>';
+		echo $ERROR_HTML;
 		return;
 	}
 
