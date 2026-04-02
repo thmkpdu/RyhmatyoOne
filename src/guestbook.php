@@ -47,6 +47,34 @@ try {
 // Catch if user is submitting a new guestbook entry
 // and consturct a SQL INSERT statement using user posted values and execute it
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+	// Rate limit
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$file = sys_get_temp_dir() . "/gb_" . md5($ip);
+
+	if(file_exists($file) && time() - filemtime($file) < 30) {
+		// Rate limit kicks in, redirect to self
+		error_log("Rate limit kicked in", 0);
+		header("Location: " . $_SERVER['PHP_SELF']);
+		return;
+	}
+	touch($file);
+
+	// Honeypot
+	if(!empty($_POST['firstname'])) {
+		// Bot detection kicks in, redirect to self
+		error_log("Bot detection kicked in", 0);
+		header("Location: " . $_SERVER['PHP_SELF']);
+		return;
+	}
+
+	// Time check
+	if(time() - $_POST['form_time'] < 3) {
+		// Suspiciously fast, redirect to self
+		error_log("Faster than 3 seconds", 0);
+		header("Location: " . $_SERVER['PHP_SELF']);
+		return;
+	}
+
 	$name = $_POST["name"];
 	$email = $_POST["email"];
 	$message = $_POST["message"];
@@ -94,8 +122,11 @@ try {
 		<div class="entry">
 			<h4>Leave a message to our guestbook</h4>
 			<form method="post">
-				<!-- Javascript stores user's datetime from browser to a hidden input -->
-				<input id="time" type="hidden" name="stamp">
+				<div class="shadow">
+					<input type="text" name="firstname" autocomplete="off" aria-hidden="true" tabindex="-1">
+					<input type="text" name="form_time" value=<?php echo time()?>>
+					<input id="time" type="text" name="stamp" autocomplete="off" aria-hidden="true" tabindex="-1">
+				</div>
 				<div class="name_div">
 					<label for="name">Name: </label>
 					<input name="name" type=text required>

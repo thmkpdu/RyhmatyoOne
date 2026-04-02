@@ -30,6 +30,10 @@ img {
 	align-items: center;
 }
 
+.shadow input {
+	display: none;
+}
+
 input {
 	width: 300px;
 }
