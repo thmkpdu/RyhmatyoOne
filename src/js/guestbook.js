@@ -1,10 +1,10 @@
 const button = document.getElementById("button");
 
 /*
-* Get datetime string from browser, remove seconds part from string 
-* and store string to a hidden input's value
+* Get time from browser, convert it to a UNIX timestamp and
+* store it to a hidden input's value before POST happens
 */
 button.addEventListener("click", function (event) {
-	const dt = document.getElementById("time");
-	dt.value = new Date().toUTCString().replace(/:\d{2} GMT$/, " GMT");
+	const stamp = document.getElementById("time");
+	stamp.value = Math.floor(Date.now() / 1000);
 });
