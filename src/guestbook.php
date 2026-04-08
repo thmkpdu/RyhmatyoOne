@@ -41,7 +41,7 @@ try {
 	$ERROR_HTML .= '</body>';
 	$ERROR_HTML .= '</html>';
 	echo $ERROR_HTML;
-	return;
+	exit();
 }
 
 // Catch if user is submitting a new guestbook entry
@@ -78,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$ERROR_HTML .= '</body>';
 		$ERROR_HTML .= '</html>';
 		echo $ERROR_HTML;
-		return;
+		exit();
 	} finally {
 		touch($file);
 	}
@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	if($stamp === 0) {
 		header("Location: " . $_SERVER['PHP_SELF']);
-		return;
+		exit();
 	}
 
 	try {
@@ -102,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	} finally {
 		// Redirect to self to prevent secondary submits on reload
     	header("Location: " . $_SERVER['PHP_SELF']);
-    	return;
+    	exit();
     }
 }
 
@@ -163,7 +163,7 @@ try {
 				<th>Message</th>
 			</tr>
 			<?php // Guestbook entries dynamically from database
-				if($data_set === false) return;
+				if($data_set === false) exit();
 				while($row = $data_set->fetch_assoc()) {
 					echo "<tr>";
 					echo "<td>" . htmlspecialchars($row['datetime']) . "</td>";
