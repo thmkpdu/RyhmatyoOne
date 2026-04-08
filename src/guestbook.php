@@ -56,9 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Rate limit kicks in
 			error_log("Rate limit kicked in", 0);
 			throw new Exception("Guestbook is rate limited");
-			touch($file);
 		}
-		touch($file);
 
 		if(!empty($_POST['firstname'])) {
 			// Bot detection kicks in
@@ -81,6 +79,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$ERROR_HTML .= '</html>';
 		echo $ERROR_HTML;
 		return;
+	} finally {
+		touch($file);
 	}
 
 	$name = $_POST["name"];
