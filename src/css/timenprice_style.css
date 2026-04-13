@@ -1,0 +1,35 @@
+body {
+    
+    background-color: lightgray;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    justify-content: space-around;
+    
+}
+
+body div {
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-top: 40px;
+    padding-bottom: 20px;
+    font-size: larger;
+    width: 600px;
+    align-items: stretch;
+}
+
+#times {
+    background-color: whitesmoke;
+}
+
+#prices {
+    background-color: whitesmoke;
+}
+
+.header {
+    font-weight: bold;
+}
+
+
