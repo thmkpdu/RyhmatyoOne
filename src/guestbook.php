@@ -27,7 +27,8 @@ try {
 	$sql .= "DROP COLUMN IF EXISTS dt";
 	$altered = $conn->query($sql);
 
-	// If table was altered set timestamps to current server time
+	// If table was altered old record's stamp column's value is 0.
+	// Set stamp to server time.
 	$now = time();
 	$entry_cmd = $conn->prepare("UPDATE entries SET stamp=? WHERE stamp = 0");
 	$entry_cmd->bind_param("i", $now);
@@ -45,7 +46,6 @@ try {
 }
 
 // Catch if user is submitting a new guestbook entry
-// and consturct a SQL INSERT statement using user posted values and execute it
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	// Rate limit
 	$ip = $_SERVER['REMOTE_ADDR'];
@@ -94,7 +94,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	try {
+		// Consturct a SQL INSERT statement
 		$entry_cmd = $conn->prepare("INSERT INTO entries (stamp, name, email, message) VALUES(?, ?, ?, ?)");
+		// Bind posted values to SQL statement
 		$entry_cmd->bind_param("isss", $stamp, $name, $email, $message);
 		$entry_cmd->execute();
 	} catch(Throwable) {
