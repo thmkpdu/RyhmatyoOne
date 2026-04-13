@@ -32,4 +32,8 @@ body div {
     font-weight: bold;
 }
 
+#isopen {
+    color: darkred;
+    background-color: greenyellow;
+}
 
