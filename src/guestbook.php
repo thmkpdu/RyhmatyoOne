@@ -27,7 +27,7 @@ try {
 	$sql .= "DROP COLUMN IF EXISTS dt";
 	$altered = $conn->query($sql);
 
-	// If table was altered old record's stamp column's value is 0.
+	// If table was altered the timestamp field values of old records are 0.”
 	// Set stamp to server time.
 	$now = time();
 	$entry_cmd = $conn->prepare("UPDATE entries SET stamp=? WHERE stamp = 0");
