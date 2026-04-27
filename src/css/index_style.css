@@ -15,6 +15,14 @@ body {
     background-size: 100% auto;
 }
 
+#header p {
+    height: 10px;
+    margin: 0px;
+    padding: 0px;
+    text-align: right;
+    cursor: pointer;
+}
+
 #header h1 {
     background-color: rgba(0,0,0,0.8);
     font-family:Impact, 'Arial Narrow Bold', sans-serif;
@@ -41,6 +49,7 @@ body {
   font-size: 20px;
   padding: 14px 16px;
   margin-right: 5px;
+  cursor: pointer;
   
 }
 
