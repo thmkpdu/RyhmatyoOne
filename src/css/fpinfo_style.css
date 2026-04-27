@@ -17,6 +17,10 @@ body div {
     align-self: stretch;
 }
 
+body div p {
+    padding-bottom: 20px;
+}
+
 .fpImg {
     background-color: lightgray;
     

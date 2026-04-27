@@ -30,6 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("pageContent").setAttribute("src", "time_n_price.html");
     });
 
+    //link to admin login page
+    document.getElementById("adminLink").addEventListener("click", () => {
+        document.getElementById("pageContent").setAttribute("src", "admin.html");
+    });
 
 });
 
