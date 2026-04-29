@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	} catch(Exception $e) {
 		$ERROR_HTML = '<!DOCTYPE html><html lang="en"><head>';
-		$ERROR_HTML .= '<meta http-equiv="refresh" content="3"url=' . $_SERVER['PHP_SELF'] . '">';
+		$ERROR_HTML .= '<meta http-equiv="refresh" content="3;url=' . $_SERVER['PHP_SELF'] . '">';
 		$ERROR_HTML .= '</head><body>';
 		$ERROR_HTML .= '<h1 style="text-align:center">' . $e->getMessage() . '</h1>';
 		$ERROR_HTML .= '</body>';
