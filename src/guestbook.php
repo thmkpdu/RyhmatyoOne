@@ -22,7 +22,7 @@ try {
 	$conn->query($sql);
 
 	// If old table is found, alter table to support new timestamps
-	$sql = "ALTER TABLE IF EXISTS entries ";
+	$sql = "ALTER TABLE entries ";
 	$sql .= "ADD COLUMN IF NOT EXISTS stamp INT UNSIGNED NOT NULL, ";
 	$sql .= "DROP COLUMN IF EXISTS dt";
 	$altered = $conn->query($sql);
@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	} catch(Exception $e) {
 		$ERROR_HTML = '<!DOCTYPE html><html lang="en"><head>';
-		$ERROR_HTML .= '<meta http-equiv="refresh" content="3"url=' . $_SERVER['PHP_SELF'] . '">';
+		$ERROR_HTML .= '<meta http-equiv="refresh" content="3;url=' . $_SERVER['PHP_SELF'] . '">';
 		$ERROR_HTML .= '</head><body>';
 		$ERROR_HTML .= '<h1 style="text-align:center">' . $e->getMessage() . '</h1>';
 		$ERROR_HTML .= '</body>';
