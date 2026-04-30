@@ -22,7 +22,7 @@ try {
 	$conn->query($sql);
 
 	// If old table is found, alter table to support new timestamps
-	$sql = "ALTER TABLE IF EXISTS entries ";
+	$sql = "ALTER TABLE entries ";
 	$sql .= "ADD COLUMN IF NOT EXISTS stamp INT UNSIGNED NOT NULL, ";
 	$sql .= "DROP COLUMN IF EXISTS dt";
 	$altered = $conn->query($sql);
