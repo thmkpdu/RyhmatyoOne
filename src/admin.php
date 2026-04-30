@@ -1,3 +1,14 @@
+<?php
+	include "session.php";
+	session_start();
+
+	if(session_is_valid()) {
+		// Redirect to set times page when valid session is available
+		header("Location: settimes.php");
+		exit();
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +18,10 @@
     <link rel="stylesheet" href="./css/adlog_style.css">
 </head>
 <body>
+	<?php echo "<p>Hello " . $_SESSION["admin"] . ":" . $_SESSION["stamp"] . ":" . session_id() . "</p>";?>
     <h1>Admin login</h1>
     <div class="loginBox">
-        <form method="post">
+        <form action="auth.php" method="post">
 			<div class="shadow">
 				<input type="text" name="username" autocomplete="off" aria-hidden="true" tabindex="-1">
 			</div>
@@ -24,7 +36,7 @@
 			<button id="btnLogin" type="submit">Log in</button>
 		</form>
     </div>
-	<a href="settimes.html">Temporary link to see the settings page, remove later.</a>
+	<a href="settimes.php">Temporary link to see the settings page, remove later.</a>
     <script src="./js/adlog_script.js"></script>
 </body>
 </html>
