@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //link to admin login page
     document.getElementById("adminLink").addEventListener("click", () => {
-        document.getElementById("pageContent").setAttribute("src", "admin.html");
+        document.getElementById("pageContent").setAttribute("src", "admin.php");
     });
 
 });
