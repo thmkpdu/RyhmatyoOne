@@ -2,6 +2,11 @@
 include "session.php";
 session_start();
 
+$ERROR_HTML = '<!DOCTYPE html><html lang="en">';
+$ERROR_HTML .= '<head><meta http-equiv="refresh" content="3; url=admin.php"></head>';
+$ERROR_HTML .= '<body><h1 style="text-align:center">Sorry, cannot save times</h1>';
+$ERROR_HTML .= '</body></html>';
+
 if(!session_is_valid()) {
 	$TIMED_HTML = '<!DOCTYPE html><html lang="en">';
 	$TIMED_HTML .= '<head><meta http-equiv="refresh" content="3; url=admin.php"></head>';
@@ -13,13 +18,12 @@ if(!session_is_valid()) {
 
 $_SESSION["stamp"] = time();
 
-$conf = require "../connection/connect.php";
-
-// Set report mode
-$driver = new mysqli_driver();
-$driver->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
-
 try {
+	$conf = require "../connection/connect.php";
+
+	$driver = new mysqli_driver();
+	$driver->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
+
 	$conn = new mysqli($conf['host'], $conf["user"], $conf["pass"], $conf["db"]);
 	$conn->set_charset('utf8mb4');
 
@@ -27,11 +31,10 @@ try {
 	$sql .= '(open BOOLEAN NOT NULL, ';
 	$sql .= 'opentime CHAR(5) NOT NULL, ';
 	$sql .= 'closetime CHAR(5) NOT NULL)';
-
 	$conn->query($sql);
-
 } catch(mysqli_sql_exception $e) {
 	error_log($e->getMessage());
+	echo $ERROR_HTML;
 	exit();
 }
 
@@ -85,11 +88,7 @@ try {
 
 } catch (Exception $e) {
     error_log($e->getMessage(), 0);
-    header("Location: settimes.php");
-    exit();
-} catch (Throwable $t) {
-    error_log($t->getMessage(), 0);
-    header("Location: settimes.php");
+    echo $ERROR_HTML;
     exit();
 }
 
@@ -106,7 +105,12 @@ try {
 	header("Location: settimes.php");
 } catch(mysqli_sql_exception $e) {
 	error_log($e->getMessage(), 0);
+	echo $ERROR_HTML;
 	exit();
+} catch (Throwable $t) {
+    error_log($t->getMessage(), 0);
+    echo $ERROR_HTML;
+    exit();
 }
 
 ?>
