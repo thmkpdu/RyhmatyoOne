@@ -11,7 +11,7 @@ function session_is_valid() {
 		if($_SESSION["timedout"]) throw new Exception("Session timed out");
 		if(empty($_SESSION["admin"])) throw new Exception("Admin not set in session");
 	} catch(Exception $e) {
-		error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
+		error_log("session.php: " . $e->getMessage(), 0);
 		return false;
 	}
 	return true;
