@@ -29,8 +29,8 @@ try {
 
 	$sql = 'CREATE TABLE IF NOT EXISTS user ';
 	$sql .= '(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, ';
-	$sql .= 'name VARCHAR(512) NOT NULL UNIQUE DEFAULT "placeholder", ';
-	$sql .= 'pass VARCHAR(512) NOT NULL DEFAULT "placeholder")';
+	$sql .= 'name VARCHAR(512) NOT NULL UNIQUE DEFAULT "$2y$15$0n82r6J.ZfOwcnZIK/dvbO9JsMlBkR.rG0bmPcgbGd4vNnkeY6v8W", ';
+	$sql .= 'pass VARCHAR(512) NOT NULL DEFAULT "$2y$15$1FSwxnAeM83EsYOQhFvWD.o32wnnC3nUhiiwAu66CpoUG38r0inCW")';
 	$conn->query($sql);
 } catch(mysqli_sql_exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
