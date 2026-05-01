@@ -34,7 +34,7 @@ try {
 	$conn->query($sql);
 } catch(mysqli_sql_exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
-	echo $EEROR_HTML;
+	echo $ERROR_HTML;
 	exit();
 }
 
