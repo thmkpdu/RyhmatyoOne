@@ -109,7 +109,7 @@
                 <input type="checkbox" id="chbSat" name="Sat" <?php if($rows) echo $data[5][0] ? "checked":"";?>>
                 <p>Saturday</p>
                 <input name="SatOpen" type=time value=<?php if($rows) echo '"' . htmlspecialchars($data[5][1]) . '"';?>>
-                <input name="SatClose" type=time <?php if($rows) echo '"' . htmlspecialchars($data[5][2]) . '"';?>>
+                <input name="SatClose" type=time value=<?php if($rows) echo '"' . htmlspecialchars($data[5][2]) . '"';?>>
             </div>
             <div id="divSun" class="dayDiv">
                 <input type="checkbox" id="chbSun" name="Sun" <?php if($rows) echo $data[6][0] ? "checked":"";?>>
