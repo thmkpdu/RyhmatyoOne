@@ -40,12 +40,15 @@
 		error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
 	} catch(Throwable $t) {
 		error_log($_SERVER['PHP_SELF'] . ": " . $t->getMessage(), 0);
-	} finally {
-		if($dataset === false || $dataset === true) {
-			$rows = false;
-		} else {
-			$rows = true;
-		}
+	}
+
+	try {
+		if(!isset($dataset)) throw new Exception("$dataset undefined");
+		if($dataset === false) throw new Exception("$dataset false");
+		if($dataset === true) throw new Exception("$dataset true");
+		$rows = true;
+	} catch(Exception $e) {
+		$rows = false;
 	}
 ?>
 
