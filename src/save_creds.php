@@ -50,6 +50,7 @@ try {
 } catch(Exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
 	echo $ERROR_HTML;
+	exit();
 }
 
 try{
