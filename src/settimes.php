@@ -118,7 +118,7 @@
                 <input name="SunClose" type=time value=<?php if($rows) echo '"' . htmlspecialchars($data[6][2]) . '"';?>>
             </div>
             <input type="submit" id="btnOk" value="Ok">
-            <button id="btnCancel">Cancel</button>
+            <input type="reset" id="btnCancel" value="Reset">
         </form>
     </div>
 </body>
