@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //opening times and prices
     document.getElementById("btnTimeNPrice").addEventListener("click", () => {
-        document.getElementById("pageContent").setAttribute("src", "time_n_price.html");
+        document.getElementById("pageContent").setAttribute("src", "time_n_price.php");
     });
 
     //link to admin login page
