@@ -56,6 +56,14 @@ body > div {
     margin-top: 0px;
 }
 
+#descriptions p:nth-child(3) {
+    width: 350px;
+}
+#descriptions p:nth-child(4) {
+    width: 350px;
+}
+
+
 .dayDiv {
     display: flex;
     flex-direction: row;
@@ -64,15 +72,33 @@ body > div {
     margin-bottom: 5px;
 }
 
-.dayDiv * {
+.dayDiv input {
     width: 150px;
     text-align: center;
     font-size: 16px;
 }
 
+.theDay {
+    width: 150px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.doubleDot {
+    text-align: center;
+    width: 10px;
+}
+
+.arrow {
+    text-align: center;
+    width: 40px;
+}
+
 .dayDiv button {
     margin-left: 20px;
 }
+
+
 
 #btnLogout {
     font-size: 24px;
