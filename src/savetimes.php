@@ -29,8 +29,8 @@ try {
 
 	$sql = 'CREATE TABLE IF NOT EXISTS times ';
 	$sql .= '(open BOOLEAN NOT NULL, ';
-	$sql .= 'opentime CHAR(5) NOT NULL, ';
-	$sql .= 'closetime CHAR(5) NOT NULL)';
+	$sql .= 'opentime TIME NOT NULL, ';
+	$sql .= 'closetime TIME NOT NULL)';
 	$conn->query($sql);
 } catch(mysqli_sql_exception $e) {
 	error_log($e->getMessage());
@@ -42,7 +42,7 @@ try {
 try {
     if($_SERVER["REQUEST_METHOD"] !== "POST") throw new Exception("Unexpected HTTP request");
 
-    $closed = [false, "0", "0"];
+    $closed = [false, "00:00", "00:00"];
 
 	if(!empty($_POST["Mon"]) && !empty($_POST["MonOpen"]) && !empty($_POST["MonClose"])) {
 		$data[] = [true, $_POST["MonOpen"], $_POST["MonClose"]];
