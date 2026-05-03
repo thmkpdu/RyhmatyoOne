@@ -1,5 +1,5 @@
 <?php
-include "functions.php"
+include "functions.php";
 
 // Set reporting mode to almost all
 $driver = new mysqli_driver();
