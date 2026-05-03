@@ -21,7 +21,7 @@ if(session_is_valid()) {
 }
 
 try {
-	if($_SERVER["REQUEST_METHOD"] === "POST") {
+	if($_SERVER["REQUEST_METHOD"] !== "POST") {
 		throw new Exception("Unexpected http request");
 	}
 	if(empty($_POST["user"]) || empty($_POST["re_user"])) {
