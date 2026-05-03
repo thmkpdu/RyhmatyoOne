@@ -9,7 +9,7 @@ $CONF_HTML .= '<script>setTimeout(() => {window.top.location.href = "index.html"
 $CONF_HTML .= '</body>';
 $CONF_HTML .= '</html>';
 
-$_SESSION = [];
+session_clean_up();
 session_destroy();
 
 if(!session_is_valid()) {
