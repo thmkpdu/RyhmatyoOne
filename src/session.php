@@ -1,8 +1,6 @@
 <?php
 
 $timeout = 60;
-$user_hash = "";
-$pass_hash = "";
 
 function session_is_valid() {
 	global $timeout;
