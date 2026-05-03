@@ -42,6 +42,9 @@ try {
 	if(empty($_POST["old_passw"])) {
 		throw new Exception("No old passwd in POST");
 	}
+	if($_POST["passw"] === $_POST["old_passw"]) {
+		throw new Exception("New password is same as old password");
+	}
 	if(!password_verify($_POST["old_user"], $_SESSION["user_hash"])) {
 		throw new Exception("Old username doesn't match");
 	}
