@@ -64,43 +64,43 @@
         <form method="post" id="weekdayForm">
             <div id="divMon" class="dayDiv">
                 <input type="checkbox" id="chbMon" name="Mon" <?php if($dataset) echo $data[0][0] ? "checked":""; ?>>
-                <p>Monday</p>
+                <p class="theDay">Monday</p>
                 <input name="MonOpen" type=time <?php if($dataset) echo '"' . $data[0][1] . '"';?>>
                 <input name="MonClose" type=time <?php if($dataset) echo '"' . $data[0][2] . '"';?>>
             </div>
             <div id="divTue" class="dayDiv">
                 <input type="checkbox" id="chbTue" name="Tue" <?php if($dataset) echo $data[1][0] ? "checked":""; ?>>
-                <p>Tuesday</p>
+                <p class="theDay">Tuesday</p>
                 <input name="TueOpen" type=time <?php if($dataset) echo '"' . $data[1][1] . '"';?>>
                 <input name="TueClose" type=time <?php if($dataset) echo '"' . $data[1][2] . '"';?>>
             </div>
             <div id="divWed" class="dayDiv">
                 <input type="checkbox" id="chbWed" name="Wed" <?php if($dataset) echo $data[2][0] ? "checked":""; ?>>
-                <p>Wednesday</p>
+                <p class="theDay">Wednesday</p>
                 <input name="WedOpen" type=time <?php if($dataset) echo '"' . $data[2][1] . '"';?>>
                 <input name="WedClose" type=time <?php if($dataset) echo '"' . $data[2][2] . '"';?>>
             </div>
             <div id="divThu" class="dayDiv">
                 <input type="checkbox" id="chbThu" name="Thu" <?php if($dataset) echo $data[3][0] ? "checked":""; ?>>
-                <p>Thursday</p>
+                <p class="theDay">Thursday</p>
                 <input name="ThuOpen" type=time <?php if($dataset) echo '"' . $data[3][1] . '"';?>>
                 <input name="ThuClose" type=time <?php if($dataset) echo '"' . $data[3][2] . '"';?>>
             </div>
             <div id="divFri" class="dayDiv">
                 <input type="checkbox" id="chbFri" name="Fri" <?php if($dataset) echo $data[4][0] ? "checked":""; ?>>
-                <p>Friday</p>
+                <p class="theDay">Friday</p>
                 <input name="FriOpen" type=time <?php if($dataset) echo '"' . $data[4][1] . '"';?>>
                 <input name="FriClose" type=time <?php if($dataset) echo '"' . $data[4][2] . '"';?>>>
             </div>
             <div id="divSat" class="dayDiv">
                 <input type="checkbox" id="chbSat" name="Sat" <?php if($dataset) echo $data[5][0] ? "checked":""; ?>>
-                <p>Saturday</p>
+                <p class="theDay">Saturday</p>
                 <input name="SatOpen" type=time <?php if($dataset) echo '"' . $data[5][1] . '"';?>>
                 <input name="SatClose" type=time <?php if($dataset) echo '"' . $data[5][2] . '"';?>>
             </div>
             <div id="divSun" class="dayDiv">
                 <input type="checkbox" id="chbSun" name="Sun" <?php if($dataset) echo $data[6][0] ? "checked":""; ?>>
-                <p>Sunday</p>
+                <p class="theDay">Sunday</p>
                 <input name="SunOpen" type=time <?php if($dataset) echo '"' . $data[6][1] . '"';?>>
                 <input name="SunClose" type=time <?php if($dataset) echo '"' . $data[6][2] . '"';?>>
             </div>
