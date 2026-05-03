@@ -12,6 +12,7 @@ if(!session_is_valid()) {
 	$TIMED_HTML .= '<head><meta http-equiv="refresh" content="3; url=admin.php"></head>';
 	$TIMED_HTML .= '<body><h1 style="text-align:center">Sorry, session timed out</h1>';
 	$TIMED_HTML .= '</body></html>';
+	session_clean_up();
 	echo $TIMED_HTML;
 	exit();
 }
