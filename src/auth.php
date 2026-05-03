@@ -63,8 +63,8 @@ try {
 	$result = $conn->query($sql);
 	$row = $result->fetch_assoc();
 	$passwd_is_default = $row["pass"] === $def_val; //Evalutes true if default password in database.
-	$user_hash = $row["name"];
-	$pass_hash = $row["pass"];
+	$_SESSION["user_hash"] = $row["name"];
+	$_SESSION["pass_hash"] = $row["pass"];
 } catch(mysqli_sql_exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
 	echo $ERROR_HTML;
@@ -87,7 +87,7 @@ if($passwd_is_default){
 	}
 
 	// Check if user submitted default credentials
-	if(password_verify($_POST["user"], $user_hash) && password_verify($_POST["passw"], $pass_hash)) {
+	if(password_verify($_POST["user"], $_SESSION["user_hash"]) && password_verify($_POST["passw"], $_SESSION["pass_hash"])) {
 		$_SESSION["admin"] = $_POST["user"];
 		$_SESSION["stamp"] = time();
 		session_regenerate_id(true);
@@ -107,8 +107,8 @@ try {
 	if($_SERVER["REQUEST_METHOD"] !== "POST") throw new Exception("Unexpected HTTP request");
 
 	// Check if user submitted valid credentials
-	if(!password_verify($_POST["user"], $user_hash)) throw new Exception("Provided username is not admin's name");
-	if(!password_verify($_POST["passw"], $pass_hash)) throw new Exception("Provided password is invalid");
+	if(!password_verify($_POST["user"], $_SESSION["user_hash"])) throw new Exception("Provided username is not admin's name");
+	if(!password_verify($_POST["passw"], $_SESSION["pass_hash"])) throw new Exception("Provided password is invalid");
 
 	$_SESSION["admin"] = $_POST["user"];
 	$_SESSION["stamp"] = time();

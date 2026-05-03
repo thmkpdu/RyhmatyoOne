@@ -42,10 +42,10 @@ try {
 	if(empty($_POST["old_passw"])) {
 		throw new Exception("No old passwd in POST");
 	}
-	if(!password_verify($_POST["old_user"], $user_hash)) {
+	if(!password_verify($_POST["old_user"], $_SESSION["user_hash"])) {
 		throw new Exception("Old username doesn't match");
 	}
-	if(!password_verify($_POST["old_passw"], $pass_hash)) {
+	if(!password_verify($_POST["old_passw"], $_SESSION["pass_hash"])) {
 		throw new Exception("Old password doesn't match");
 	}
 } catch(Exception $e) {
