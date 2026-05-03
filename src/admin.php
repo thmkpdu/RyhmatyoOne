@@ -1,12 +1,18 @@
 <?php
-	include "session.php";
-	session_start();
+include "session.php";
+session_start();
 
-	if(session_is_valid()) {
-		// Redirect to set times page when valid session is available
-		header("Location: settimes.php");
-		exit();
-	}
+if(session_is_valid()) {
+	// Activity update
+	$_SESSION["stamp"] = time();
+
+	// Session is valid, no need to authenticate again.
+	// Redirect to set times page when session is valid.
+	header("Location: settimes.php");
+
+	// Nothing to do here after redirect
+	exit();
+}
 ?>
 
 <!DOCTYPE html>

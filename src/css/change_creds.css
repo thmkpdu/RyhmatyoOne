@@ -1,0 +1,45 @@
+body {
+	font-family: Helvetica, sans-serif;
+	font-size: 16px;
+	background-color: whitesmoke;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1 {
+	text-align: center;
+}
+
+.container {
+	text-align: center;
+	background-color: lightgray;
+	border: 2px;
+	border-style: solid;
+	border-color: slategray;
+	width: 400px;
+	padding: 10px;
+}
+
+div {
+	display: flex;
+	justify-content: center;
+	padding: 0px;
+}
+
+
+.shadow input {
+	display: none;
+}
+
+.item {
+	display: flex;
+	justify-content: space-between;
+	column-gap: 5px;
+}
+
+.buttons {
+/*	display: flex;
+	justiy-content: center;*/
+	column-gap: 5px;
+}

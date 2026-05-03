@@ -1,4 +1,5 @@
 <?php
+include "functions.php";
 
 // Set reporting mode to almost all
 $driver = new mysqli_driver();
@@ -35,13 +36,7 @@ try {
 	$entry_cmd->execute();
 
 } catch (mysqli_sql_exception $e) {
-	// HTML stub for error condition
-	$ERROR_HTML = '<!DOCTYPE html><html lang="en">';
-	$ERROR_HTML .= '<body>';
-	$ERROR_HTML .= '<h1 style="text-align:center">Guestbook currently unavailable</h1>';
-	$ERROR_HTML .= '</body>';
-	$ERROR_HTML .= '</html>';
-	echo $ERROR_HTML;
+	html_direct("Guestbook currently unavailable", $_SERVER['PHP_SELF'], 3, false);
 	exit();
 }
 
@@ -71,13 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 
 	} catch(Exception $e) {
-		$ERROR_HTML = '<!DOCTYPE html><html lang="en"><head>';
-		$ERROR_HTML .= '<meta http-equiv="refresh" content="3;url=' . $_SERVER['PHP_SELF'] . '">';
-		$ERROR_HTML .= '</head><body>';
-		$ERROR_HTML .= '<h1 style="text-align:center">' . $e->getMessage() . '</h1>';
-		$ERROR_HTML .= '</body>';
-		$ERROR_HTML .= '</html>';
-		echo $ERROR_HTML;
+		html_direct($e->getMessage(), $_SERVER['PHP_SELF'], 3, false);
 		exit();
 	} finally {
 		touch($file);

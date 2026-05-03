@@ -1,25 +1,22 @@
 <?php
 include "session.php";
+include "functions.php";
 session_start();
 
 if(!session_is_valid()) {
-	$TIMED_HTML = '<!DOCTYPE html><html lang="en">';
-	$TIMED_HTML .= '<head><meta http-equiv="refresh" content="3; url=admin.php"></head>';
-	$TIMED_HTML .= '<body><h1 style="text-align:center">Sorry, session timed out</h1>';
-	$TIMED_HTML .= '</body></html>';
-	echo $TIMED_HTML;
+	session_clean_up();
+	html_direct("Sorry, session timed out", "admin.php", 3, false);
 	exit();
 }
 
 $_SESSION["stamp"] = time();
 
-$conf = require "../connection/connect.php";
-
-// Set report mode
-$driver = new mysqli_driver();
-$driver->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
-
 try {
+	$conf = require "../connection/connect.php";
+
+	$driver = new mysqli_driver();
+	$driver->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
+
 	$conn = new mysqli($conf['host'], $conf["user"], $conf["pass"], $conf["db"]);
 	$conn->set_charset('utf8mb4');
 
@@ -27,11 +24,10 @@ try {
 	$sql .= '(open BOOLEAN NOT NULL, ';
 	$sql .= 'opentime CHAR(5) NOT NULL, ';
 	$sql .= 'closetime CHAR(5) NOT NULL)';
-
 	$conn->query($sql);
-
 } catch(mysqli_sql_exception $e) {
 	error_log($e->getMessage());
+	html_direct("Sorry, session timed out", "admin.php", 3, false);
 	exit();
 }
 
@@ -39,7 +35,7 @@ try {
 try {
     if($_SERVER["REQUEST_METHOD"] !== "POST") throw new Exception("Unexpected HTTP request");
 
-    $closed = [false, "0", "0"];
+    $closed = [false, "00:00", "00:00"];
 
 	if(!empty($_POST["Mon"]) && !empty($_POST["MonOpen"]) && !empty($_POST["MonClose"])) {
 		$data[] = [true, $_POST["MonOpen"], $_POST["MonClose"]];
@@ -85,11 +81,7 @@ try {
 
 } catch (Exception $e) {
     error_log($e->getMessage(), 0);
-    header("Location: settimes.php");
-    exit();
-} catch (Throwable $t) {
-    error_log($t->getMessage(), 0);
-    header("Location: settimes.php");
+    html_direct("Sorry, session timed out", "admin.php", 3, false);
     exit();
 }
 
@@ -106,7 +98,12 @@ try {
 	header("Location: settimes.php");
 } catch(mysqli_sql_exception $e) {
 	error_log($e->getMessage(), 0);
+	html_direct("Sorry, session timed out", "admin.php", 3, false);
 	exit();
+} catch (Throwable $t) {
+    error_log($t->getMessage(), 0);
+    html_direct("Sorry, session timed out", "admin.php", 3, false);
+    exit();
 }
 
 ?>
