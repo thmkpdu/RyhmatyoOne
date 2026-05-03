@@ -1,20 +1,13 @@
 <?php
+	include "functions.php";
 	include "session.php";
 	session_start();
-
-	// HTML stub for error condition
-	$ERROR_HTML = '<!DOCTYPE html><html lang="en">';
-	$ERROR_HTML .= '<head><meta http-equiv="refresh" content="3; url=admin.php"></head>';
-	$ERROR_HTML .= '<body>';
-	$ERROR_HTML .= '<h1 style="text-align:center">Set times page currently unavailable</h1>';
-	$ERROR_HTML .= '</body>';
-	$ERROR_HTML .= '</html>';
 
 	if(!session_is_valid()) {
 		error_log($_SERVER['PHP_SELF'] . ": Session not valid", 0);
 		session_clean_up();
 		session_destroy();
-		echo $ERROR_HTML;
+		html_direct("Set times page currently unavailable", "admin.php",  3, false);
 		exit();
 	}
 	$_SESSION["stamp"] = time();

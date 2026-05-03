@@ -1,19 +1,11 @@
 <?php
 include "session.php";
+include "functions.php";
 session_start();
 
-$ERROR_HTML = '<!DOCTYPE html><html lang="en">';
-$ERROR_HTML .= '<head><meta http-equiv="refresh" content="3; url=admin.php"></head>';
-$ERROR_HTML .= '<body><h1 style="text-align:center">Sorry, cannot save times</h1>';
-$ERROR_HTML .= '</body></html>';
-
 if(!session_is_valid()) {
-	$TIMED_HTML = '<!DOCTYPE html><html lang="en">';
-	$TIMED_HTML .= '<head><meta http-equiv="refresh" content="3; url=admin.php"></head>';
-	$TIMED_HTML .= '<body><h1 style="text-align:center">Sorry, session timed out</h1>';
-	$TIMED_HTML .= '</body></html>';
 	session_clean_up();
-	echo $TIMED_HTML;
+	html_direct("Sorry, session timed out", "admin.php", 3, false);
 	exit();
 }
 
@@ -35,7 +27,7 @@ try {
 	$conn->query($sql);
 } catch(mysqli_sql_exception $e) {
 	error_log($e->getMessage());
-	echo $ERROR_HTML;
+	html_direct("Sorry, session timed out", "admin.php", 3, false);
 	exit();
 }
 
@@ -89,7 +81,7 @@ try {
 
 } catch (Exception $e) {
     error_log($e->getMessage(), 0);
-    echo $ERROR_HTML;
+    html_direct("Sorry, session timed out", "admin.php", 3, false);
     exit();
 }
 
@@ -106,11 +98,11 @@ try {
 	header("Location: settimes.php");
 } catch(mysqli_sql_exception $e) {
 	error_log($e->getMessage(), 0);
-	echo $ERROR_HTML;
+	html_direct("Sorry, session timed out", "admin.php", 3, false);
 	exit();
 } catch (Throwable $t) {
     error_log($t->getMessage(), 0);
-    echo $ERROR_HTML;
+    html_direct("Sorry, session timed out", "admin.php", 3, false);
     exit();
 }
 
