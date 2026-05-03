@@ -123,7 +123,7 @@ try {
 			<form method="post">
 				<div class="shadow">
 					<input type="text" name="firstname" autocomplete="off" aria-hidden="true" tabindex="-1">
-					<input type="text" name="form_time" value=<?php echo time()?>>
+					<input type="text" name="form_time" value="<?= time() ?>" autocomplete="off" aria-hidden="true" tabindex="-1">
 					<input id="time" type="text" name="stamp" autocomplete="off" aria-hidden="true" tabindex="-1">
 				</div>
 				<div class="name_div">
