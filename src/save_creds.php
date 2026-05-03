@@ -15,6 +15,7 @@ if(session_is_valid()) {
 	$_SESSION["stamp"] = time();
 } else {
 	error_log($_SERVER['PHP_SELF'] . ": Session not valid", 0);
+	session_clean_up();
 	echo $ERROR_HTML;
 	exit();
 }
@@ -49,6 +50,7 @@ try {
 	}
 } catch(Exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
+	session_clean_up();
 	echo $ERROR_HTML;
 	exit();
 }
@@ -69,18 +71,18 @@ try{
 
 	// Credentials succesfully changed
 
-	unset($_SESSION["admin"]);	//Unset admin before relogin
-	unset($_POST["user"]);		//Not needed anymore
-	unset($_POST["passw"]);		//Not needed anymore
-	session_regenerate_id();	//For security
-	header("Location: admin.php"); //Force to relogin
+	session_clean_up();				//Clean up before relogin
+	session_regenerate_id();		//For security
+	header("Location: admin.php"); 	//Force to relogin
 	exit();
 } catch(mysqli_sql_exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
+	session_clean_up();
 	echo $ERROR_HTML;
 	exit();
 } catch(Throwable $t) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $t->getMessage(), 0);
+	session_clean_up();
 	echo $ERROR_HTML;
 	exit();
 }

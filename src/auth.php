@@ -11,9 +11,9 @@ $ERROR_HTML .= '</html>';
 session_start();
 include "session.php";
 if(session_is_valid()) {
-	// Something is broken execution enters here
-	error_log($_SERVER['PHP_SELF'] . ": Session not valid here" ,0);
-	unset($_SESSION["admin"]);
+	// Something is broken if execution enters here
+	error_log($_SERVER['PHP_SELF'] . ": Session broken" ,0);
+	session_clean_up();
 	echo $ERROR_HTML;
 	exit();
 }
@@ -81,6 +81,7 @@ if($passwd_is_default){
 		if(empty($_POST["passw"])) throw new Exception("Missing password in POST");
 	} catch(Exception $e) {
 		error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
+		session_clean_up();
 		echo $ERROR_HTML;
 		exit();
 	}
@@ -93,8 +94,7 @@ if($passwd_is_default){
 		header("Location: change_creds.php");
 		exit();
 	} else {
-		$_SESSION["admin"] = "";
-		$_SESSION["stamp"] = time();
+		session_clean_up();
 		session_regenerate_id(true);
 		error_log( $_SERVER['PHP_SELF'] . ": Invalid DEFAULT admin credentials submitted", 0);
 		echo $ERROR_HTML;
@@ -117,10 +117,12 @@ try {
 	exit(); // After redirect nothing to do here
 } catch (Exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
+	session_clean_up();
 	echo $ERROR_HTML;
 	exit();
 } catch (Throwable $t) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $t->getMessage(), 0);
+	session_clean_up();
 	echo $ERROR_HTML;
 	exit();
 } finally {
@@ -130,6 +132,7 @@ try {
 
 // Something is wrong if execution enters here.
 // Empty and destroy session
+session_clean_up();
 $_SESSION = [];
 session_destroy();
 

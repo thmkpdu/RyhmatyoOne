@@ -12,7 +12,7 @@
 
 	if(!session_is_valid()) {
 		error_log($_SERVER['PHP_SELF'] . ": Session not valid", 0);
-		$_SESSION = [];
+		session_clean_up();
 		session_destroy();
 		echo $ERROR_HTML;
 		exit();
