@@ -1,20 +1,13 @@
 <?php
-
-// HTML stub for error condition
-$ERROR_HTML = '<!DOCTYPE html><html lang="en">';
-$ERROR_HTML .= '<head><meta http-equiv="refresh" content="3; url=admin.php"></head>';
-$ERROR_HTML .= '<body>';
-$ERROR_HTML .= '<h1 style="text-align:center">Unable to authenticate. Try later again.</h1>';
-$ERROR_HTML .= '</body>';
-$ERROR_HTML .= '</html>';
-
+include "functions.php";
 session_start();
 include "session.php";
+
 if(session_is_valid()) {
 	// Something is broken if execution enters here
 	error_log($_SERVER['PHP_SELF'] . ": Session broken" ,0);
 	session_clean_up();
-	echo $ERROR_HTML;
+	html_direct("Unable to authenticate. Try later again.", "admin.php", 3, false);
 	exit();
 }
 
@@ -34,7 +27,7 @@ try {
 	$conn->query($sql);
 } catch(mysqli_sql_exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
-	echo $ERROR_HTML;
+	html_direct("Unable to authenticate. Try later again.", "admin.php", 3, false);
 	exit();
 }
 
@@ -46,7 +39,7 @@ try {
 	$conn->query($sql); //Second time just for testing
 }catch(mysqli_sql_exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
-	echo $ERROR_HTML;
+	html_direct("Unable to authenticate. Try later again.", "admin.php", 3, false);
 	exit();
 }
 
@@ -67,7 +60,7 @@ try {
 	$_SESSION["pass_hash"] = $row["pass"];
 } catch(mysqli_sql_exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
-	echo $ERROR_HTML;
+	html_direct("Unable to authenticate. Try later again.", "admin.php", 3, false);
 	exit();
 }
 
@@ -82,7 +75,7 @@ if($passwd_is_default){
 	} catch(Exception $e) {
 		error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
 		session_clean_up();
-		echo $ERROR_HTML;
+		html_direct("Unable to authenticate. Try later again.", "admin.php", 3, false);
 		exit();
 	}
 
@@ -97,7 +90,7 @@ if($passwd_is_default){
 		session_clean_up();
 		session_regenerate_id(true);
 		error_log( $_SERVER['PHP_SELF'] . ": Invalid DEFAULT admin credentials submitted", 0);
-		echo $ERROR_HTML;
+		html_direct("Unable to authenticate. Try later again.", "admin.php", 3, false);
 		exit();
 	}
 }
@@ -118,12 +111,12 @@ try {
 } catch (Exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
 	session_clean_up();
-	echo $ERROR_HTML;
+	html_direct("Unable to authenticate. Try later again.", "admin.php", 3, false);
 	exit();
 } catch (Throwable $t) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $t->getMessage(), 0);
 	session_clean_up();
-	echo $ERROR_HTML;
+	html_direct("Unable to authenticate. Try later again.", "admin.php", 3, false);
 	exit();
 } finally {
 	unset($_POST["passw"]);
@@ -141,4 +134,3 @@ error_log($_SERVER['PHP_SELF'] . ": Unknown error", 0);
 // Redirect user to new login attempt
 header("Location: admin.php");
 ?>
-
