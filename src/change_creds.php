@@ -46,7 +46,7 @@ if(session_is_valid()) $_SESSION["stamp"] = time();
 			</div>
 			<div class="buttons">
 				<button type="submit">Save</button>
-				<button onclick="window.location.href='index.html'">Cancel</button>
+				<button onclick="window.location.href='fp_info.html'">Cancel</button>
 			</div>
 		</form>
     </div>
