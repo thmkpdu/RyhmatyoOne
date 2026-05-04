@@ -71,38 +71,24 @@ try {
 
 } catch(Exception $e) {
 	$SunOpen = 0;
-	$SunOpenTime = "00:00";
-	$SunCloseTime = "00:00";
 	$open_times[] = ["00:00", "00:00"];
 
 	$MonOpen = 0;
-	$MonOpenTime = "00:00";
-	$MonCloseTime = "00:00";
 	$open_times[] = ["00:00", "00:00"];
 
 	$TueOpen = 0;
-	$TueOpenTime = "00:00";
-	$TueCloseTime = "00:00";
 	$open_times[] = ["00:00", "00:00"];
 
 	$WedOpen = 0;
-	$WedOpenTime = "00:00";
-	$WedCloseTime = "00:00";
 	$open_times[] = ["00:00", "00:00"];
 
 	$ThuOpen = 0;
-	$ThuOpenTime = "00:00";
-	$ThuCloseTime = "00:00";
 	$open_times[] = ["00:00", "00:00"];
 
 	$FriOpen = 0;
-	$FriOpenTime = "00:00";
-	$FriCloseTime = "00:00";
 	$open_times[] = ["00:00", "00:00"];
 
 	$SatOpen = 0;
-	$SatOpenTime = "00:00";
-	$SatCloseTime = "00:00";
 	$open_times[] = ["00:00", "00:00"];
 }
 
