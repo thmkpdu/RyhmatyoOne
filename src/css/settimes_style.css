@@ -4,11 +4,7 @@ body {
 	background-color: whitesmoke;
 	display: flex;
 	flex-direction: column;
-<<<<<<< HEAD
-	align-items: left;
-=======
->>>>>>> 6c6e87c (Adjusted styling)
-    margin: 0px;
+	margin: 0px;
     padding: 0px;
     
 }
