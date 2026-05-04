@@ -42,7 +42,6 @@ if(session_is_valid()) {
 			<button id="btnLogin" type="submit">Log in</button>
 		</form>
     </div>
-	<a href="settimes.php">Temporary link to see the settings page, remove later.</a>
     <script src="./js/adlog_script.js"></script>
 </body>
 </html>
