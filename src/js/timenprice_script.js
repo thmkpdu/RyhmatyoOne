@@ -1,25 +1,73 @@
+async function getData() {
+    try {
+        const response = await fetch("pick_times.php?echo");
+        if(!response.ok){
+            throw new Error("Failed to get data" + response.status);
+        }
+        return  await response.json();
+    } catch(error) {
+        console.log(error);
+        return null;
+    }
+}
 
 //when document loads:
-document.addEventListener("DOMContentLoaded", () => {
-    //opening times sun - sat
-    let open_times = [[9, 18],[6, 21],[6, 21],[6, 21],[6, 21],[6, 21],[9, 20],]
+document.addEventListener("DOMContentLoaded", async () => {
+	//go through days and set day 'closed' if time 00:00 to 00:00
+        let wkDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        wkDays.forEach((item) => {
+		//get the day's text
+		let dayText = document.getElementById("day"+item).textContent;
+		//count how many zeroes occur
+		let counts = dayText.match(/0/g);
+		//on 8 zeroes, set day text to closed
+		if (counts.length === 8) {
+			document.getElementById("day"+item).textContent = `${item} : Closed`;
+		}	
+	});
+       
+        let times = await getData();
 
-    //get system time info
-    let current_time = new Date();
+        // Create objects for opening and closing times
+        let opentime = new Date();
+        let closetime = new Date();
+        let current_time = new Date();
+
+        // Get day number 0-6
+        let day = current_time.getDay();
+
+        let today_open = "";
+        let today_close = "";
+        if(times) {
+                // grab open and close times
+                today_open = times[day][0];
+                today_close = times[day][1];
+        } else {
+                // Some values if getting data fails
+                today_open = "00:00";
+                today_close = "00:00";
+        }
+
+        // Split times
+        let open = today_open.split(":");
+        let close = today_close.split(":");
+
+        // Set hours, minutes and seconds
+        opentime.setHours(open[0]);
+        opentime.setMinutes(open[1]);
+        opentime.setSeconds("00");
+        closetime.setHours(close[0]);
+        closetime.setMinutes(close[1]);
+        closetime.setSeconds("00");
+
     //get current system hours and minutes
     let hours = current_time.getHours();
     let minutes = current_time.getMinutes();
-    //get current date index
-    let today_day = current_time.getDay();
-
-    //fetch day's opening and closing times from the list
-    let todays_open = open_times[today_day];
 
     //if current hours inside the given opening and closing times, show message
-    if (hours >= todays_open[0] && hours < todays_open[1]) {
+    if (current_time > opentime && current_time < closetime) {
         //add zero id minutes is less than 10 to show clock time correctly
         let string_mins = (minutes < 10) ? "0"+String(minutes) : String(minutes);
         document.getElementById("isopen").textContent = `YOUR LOCAL HEALTH FITNESS PLUS GYM IS CURRENTLY (${hours}:${string_mins}) OPEN!`;
     }
-    
 });
