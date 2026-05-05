@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 		//count how many zeroes occur
 		let counts = dayText.match(/0/g);
 		//on 8 zeroes, set day text to unclear
-		if (couts && counts.length === 8) {
+		if (counts && counts.length === 8) {
 			document.getElementById("day"+item).textContent = `${item} : Unclear, please call headquarters.`;
 		}	
 	});
