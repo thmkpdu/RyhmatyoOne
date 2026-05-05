@@ -8,7 +8,7 @@ if(session_is_valid()) {
 } else {
 	error_log($_SERVER['PHP_SELF'] . ": Session not valid", 0);
 	session_clean_up();
-	html_direct("Unable to save credentials. Try later again.", "change_creds.php", 3, false);
+	html_direct("Session timed out", "admin.php", 3, false);
 	exit();
 }
 
@@ -17,22 +17,22 @@ try {
 		throw new Exception("Unexpected http request");
 	}
 	if(empty($_POST["user"]) || empty($_POST["re_user"])) {
-		throw new Exception("No username in POST");
+		throw new Exception("No new username has been entered");
 	}
 	if($_POST["user"] !== $_POST["re_user"]) {
 		throw new Exception("New usernames don't match");
 	}
 	if(empty($_POST["old_user"])) {
-		throw new Exception("No old username in POST");
+		throw new Exception("No old username has been entered");
 	}
 	if(empty($_POST["passw"]) || empty($_POST["re_passw"])) {
-		throw new Exception("No passwdords in POST");
+		throw new Exception("No new password has been entered");
 	}
 	if($_POST["passw"] !== $_POST["re_passw"]) {
 		throw new Exception("New passwords don't match");
 	}
 	if(empty($_POST["old_passw"])) {
-		throw new Exception("No old passwd in POST");
+		throw new Exception("No old password has been entered");
 	}
 	if($_POST["passw"] === $_POST["old_passw"]) {
 		throw new Exception("New password is same as old password");
@@ -46,7 +46,7 @@ try {
 } catch(Exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
 	session_clean_up();
-	html_direct("Unable to save credentials. Try later again.", "change_creds.php", 3, false);
+	html_direct($e->getMessage(), "admin.php", 3, false);
 	exit();
 }
 
@@ -73,12 +73,12 @@ try{
 } catch(mysqli_sql_exception $e) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $e->getMessage(), 0);
 	session_clean_up();
-	html_direct("Unable to save credentials. Try later again.", "change_creds.php", 3, false);
+	html_direct("Unable to save credentials. Try later again.", "admin.php", 3, false);
 	exit();
 } catch(Throwable $t) {
 	error_log($_SERVER['PHP_SELF'] . ": " . $t->getMessage(), 0);
 	session_clean_up();
-	html_direct("Unable to save credentials. Try later again.", "change_creds.php", 3, false);
+	html_direct("Unable to save credentials. Try later again.", "admin.php", 3, false);
 	exit();
 }
 ?>

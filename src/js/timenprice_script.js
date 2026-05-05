@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         let today_close = "";
         if(times) {
                 // grab open and close times
-                today_open = times[day][0];
-                today_close = times[day][1];
+                today_open = times[day][1];
+                today_close = times[day][2];
         } else {
                 // Some values if getting data fails
                 today_open = "00:00";
