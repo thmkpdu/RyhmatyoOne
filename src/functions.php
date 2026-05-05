@@ -30,7 +30,7 @@ function is_later($a, $b) {
 	$a_minute = (int) substr($a, 3, 2);
 
 	$b_hour = (int) substr($b, 0, 2);
-	$b_hour = (int) substr($b, 3, 2);
+	$b_minute = (int) substr($b, 3, 2);
 
 	if($a_hour > $b_hour) return true;
 	if($a_hour === $b_hour && $a_minute > $b_minute) return true;
