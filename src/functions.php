@@ -34,7 +34,6 @@ function is_later($a, $b) {
 
 	if($a_hour > $b_hour) return true;
 	if($a_hour === $b_hour && $a_minute > $b_minute) return true;
-	if($a === $b) return true;
 
 	return false;
 }
