@@ -13,14 +13,15 @@ include "pick_times.php"
 <body>
     <div id="times">
         <p class="header">Staff is around and the doors are open:</p>
+        <?= ($MonOpen ?? false) ? "" : "<p>Opening hours have not been set</p>" ?>
         <ul>
-            <li id="dayMonday">Monday: <time datetime="<?=$MonOpenTime?>" class="startTime"><?=$MonOpenTime?></time> to <time datetime="<?=$MonCloseTime?>" class="endTime"><?=$MonCloseTime?></time></li>
-            <li id="dayTuesday">Tuesday: <time datetime="<?=$TueOpenTime?>" class="startTime"><?=$TueOpenTime?></time> to <time datetime="<?=$TueCloseTime?>" class="endTime"><?=$TueCloseTime?></time></li>
-            <li id="dayWednesday">Wednesday: <time datetime="<?=$WedOpenTime?>" class="startTime"><?=$WedOpenTime?></time> to <time datetime="<?=$WedCloseTime?>" class="endTime"><?=$WedCloseTime?></time></li>
-            <li id="dayThursday">Thursday: <time datetime="<?=$ThuOpenTime?>" class="startTime"><?=$ThuOpenTime?></time> to <time datetime="<?=$ThuCloseTime?>" class="endTime"><?=$ThuCloseTime?></time></li>
-            <li id="dayFriday">Friday: <time datetime="<?=$FriOpenTime?>" class="startTime"><?=$FriOpenTime?></time> to <time datetime="<?=$FriCloseTime?>" class="endTime"><?=$FriCloseTime?></time></li>
-            <li id="daySaturday">Saturday: <time datetime="<?=$SatOpenTime?>" class="startTime"><?=$SatOpenTime?></time> to <time datetime="<?=$SatCloseTime?>" class="endTime"><?=$SatCloseTime?></time></li>
-            <li id="daySunday">Sunday: <time datetime="<?=$SunOpenTime?>" class="startTime"><?=$SunOpenTime?></time> to <time datetime="<?=$SunCloseTime?>" class="endTime"><?=$SunCloseTime?></time></li>
+            <li id="dayMonday">Monday: <time datetime="<?= $MonOpenTime ?? '' ?>" class="startTime"><?= $MonOpenTime ?? '' ?></time> to <time datetime="<?= $MonCloseTime ?? '' ?>" class="endTime"><?= $MonCloseTime ?? '' ?></time></li>
+            <li id="dayTuesday">Tuesday: <time datetime="<?= $TueOpenTime ?? '' ?>" class="startTime"><?= $TueOpenTime ?? '' ?></time> to <time datetime="<?= $TueCloseTime ?? '' ?>" class="endTime"><?= $TueCloseTime ?? ''?></time></li>
+            <li id="dayWednesday">Wednesday: <time datetime="<?= $WedOpenTime ?? '' ?>" class="startTime"><?= $WedOpenTime ?? '' ?></time> to <time datetime="<?= $WedCloseTime ?? '' ?>" class="endTime"><?= $WedCloseTime ?? ''?></time></li>
+            <li id="dayThursday">Thursday: <time datetime="<?= $ThuOpenTime ?? ''?>" class="startTime"><?= $ThuOpenTime ?? '' ?></time> to <time datetime="<?= $ThuCloseTime ?? '' ?>" class="endTime"><?= $ThuCloseTime ?? '' ?></time></li>
+            <li id="dayFriday">Friday: <time datetime="<?= $FriOpenTime ?? ''?>" class="startTime"><?= $FriOpenTime ?? '' ?></time> to <time datetime="<?= $FriCloseTime ?? '' ?>" class="endTime"><?= $FriCloseTime ?? ''?></time></li>
+            <li id="daySaturday">Saturday: <time datetime="<?= $SatOpenTime ?? '' ?>" class="startTime"><?= $SatOpenTime ?? '' ?></time> to <time datetime="<?= $SatCloseTime ?? '' ?>" class="endTime"><?= $SatCloseTime ?? '' ?></time></li>
+            <li id="daySunday">Sunday: <time datetime="<?= $SunOpenTime ?? '' ?>" class="startTime"><?= $SunOpenTime ?? '' ?></time> to <time datetime="<?= $SunCloseTime ?? '' ?>" class="endTime"><?= $SunCloseTime ?? '' ?></time></li>
         </ul>
         <p>Outside these times you can visit the gym freely with a Health Fitness Plus-Gym pass any time of the day!</p>
         <p id="isopen"></p>
