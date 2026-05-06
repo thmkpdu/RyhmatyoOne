@@ -12,7 +12,6 @@ include "pick_times.php"
 </head>
 <body>
     <div id="times">
-        <p class="header">Staff is around and the doors are open:</p>
         <?= ($MonOpen ?? false) ? "" : "<p>Opening hours have not been set</p>" ?>
         <ul>
             <li id="dayMonday">Monday: <time datetime="<?= $MonOpenTime ?? '' ?>" class="startTime"><?= $MonOpenTime ?? '' ?></time> to <time datetime="<?= $MonCloseTime ?? '' ?>" class="endTime"><?= $MonCloseTime ?? '' ?></time></li>
